@@ -59,6 +59,12 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-ivory: var(--ivory);
+  --color-blush: var(--blush);
+  --color-burgundy: var(--burgundy);
+  --color-gold: var(--gold);
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, sans-serif;
 }
 
 :root {
@@ -95,6 +101,10 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  --ivory: oklch(0.968 0.014 82);
+  --blush: oklch(0.902 0.039 26);
+  --burgundy: oklch(0.29 0.105 9);
+  --gold: oklch(0.72 0.105 76);
 }
 
 .dark {
@@ -130,6 +140,10 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+  --ivory: oklch(0.968 0.014 82);
+  --blush: oklch(0.902 0.039 26);
+  --burgundy: oklch(0.29 0.105 9);
+  --gold: oklch(0.72 0.105 76);
 }
 
 @layer base {
@@ -138,7 +152,62 @@
   }
 
   body {
-    background-color: var(--color-background);
+    background-color: var(--color-ivory);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
   }
+}
+
+@utility eyebrow {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.19em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--color-burgundy) 64%, transparent);
+}
+
+@utility icon-button {
+  display: inline-flex;
+  height: 2.35rem;
+  width: 2.35rem;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-burgundy);
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+@utility color-swatch {
+  display: inline-block;
+  flex: none;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--color-burgundy) 18%, transparent);
+  cursor: pointer;
+  transition: transform 160ms ease;
+}
+
+@utility catalog-image {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-blush);
+}
+
+.catalog-image img {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  max-width: none;
+  object-fit: cover;
+}
+
+.catalog-image.top-left img { left: 0; top: 0; }
+.catalog-image.top-right img { right: 0; top: 0; }
+.catalog-image.bottom-left img { left: 0; bottom: 0; }
+.catalog-image.bottom-right img { right: 0; bottom: 0; }
+.icon-button:hover { background: color-mix(in oklab, var(--color-blush) 60%, transparent); }
+.color-swatch:hover { transform: scale(1.08); }
+.concept-static-fallback { position: absolute; inset: 0; background: url("/assets/carry-nest-product-sheet.jpg") center / 200% auto no-repeat; opacity: 0.3; filter: saturate(0.8); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }
